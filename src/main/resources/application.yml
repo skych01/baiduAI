@@ -1,0 +1,23 @@
+server:
+    port: 8081
+    servlet:
+        context-path: /
+
+spring:
+    application:
+        name: service-hi1
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka/
+
+my:
+    #百度文字识别api相关参数
+    character:
+        #url
+        url: https://aip.baidubce.com/rest/2.0/ocr/v1/general
+        #获取token相关参数
+        key: scwFcovWUYHXuEwsFkXabd8j
+        secret: mefn5MA7kB8roVv800yrmdbM6F1mwNDk
+
