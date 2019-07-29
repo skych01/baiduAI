@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>文字识别结果</title>
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/jquery.min.js"></script>
+
+</head>
+<body data-type="login">
+    <script src="assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+
+        <div class="tpl-login">
+            <div class="tpl-login-content" style="margin: 1% auto 0;">
+                <div class="tpl-login-logo" >
+
+                </div>
+
+
+
+                <form class="am-form tpl-form-line-form">
+                    <div class="am-form-group">
+                        <input type="text" class="tpl-form-input" id="fileSel" placeholder="请选择文件，识别一下">
+                        <div style="display: none">
+                            <form class="form-horizontal" role="form">
+                                <input id="fileupload" type="file" name="fileupload"
+                                       multiple="multiple"/>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <!--<button type="button" class="am-btn am-btn-primary-->
+                        <!--am-btn-block tpl-btn-bg-color-success  tpl-login-btn">开始转换</button>-->
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script th:src="@{/static/assets/jq/jquery.ui.widget.js}"></script>
+    <script th:src="@{/static/assets/jq/jquery.fileupload.js}"></script>
+    <script src="assets/js/commonApi.js"></script>
+
+<script type="application/javascript">
+    function upLoadLogo() {
+        $("#fileupload").fileupload({
+            url: 'trans',
+            type: 'post',
+            dataType: 'json',
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            done: function (e, doneData) {
+                //成功
+                console.log(doneData);
+                if (doneData.result.code == 200) {
+                    alert("上传成功");
+                } else {
+                    // Messenger().post({type: "error", message: doneData.result.msg, showCloseButton: true});
+                }
+                console.log(doneData.result.msg);
+            },
+            progressall: function (e, data) {
+                // Messenger().post({
+                //     message: "正在上传请稍后。",
+                //     showCloseButton: true
+                // });
+            },
+            fail: function (e, data) {
+                // Messenger().post({
+                //     type: "error",
+                //     message: "文件过大，请重新选择！",
+                //     showCloseButton: true
+                // });
+                alert("文件过大，无法传输");
+            }
+        });
+        //文件上传前触发事件
+        $('#fileupload').bind('fileuploadsubmit', function (e, data) {
+            // data.formData = {lssueId: topicId, lssusefileName: $("#materialName").val()};  //如果需要额外添加参数可以在这里添加
+        });
+        $('#fileupload').click();
+
+    }
+
+    $("#fileSel").click(upLoadLogo);
+</script>
+</body>
+
+</html>
