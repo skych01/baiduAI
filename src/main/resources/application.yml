@@ -21,6 +21,6 @@ my:
 
 
         #获取token相关参数
-        key: scwFcovWUYHXuEwsFkXabd8j
-        secret: mefn5MA7kB8roVv800yrmdbM6F1mwNDk
+        key: key
+        secret: sercret
 
